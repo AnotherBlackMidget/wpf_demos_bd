@@ -8,7 +8,7 @@
         Title="MainWindow" MinHeight="300" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Load Data" Click="LoadData_Click"/>
+            <MenuItem Header="Load Data" Command="{Binding LoadDataCommand}"  />
         </Menu>
     <Grid>
         <Grid.ColumnDefinitions>

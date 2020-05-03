@@ -71,6 +71,36 @@ namespace wpf_demo_phonebook
             return dataTable;
         }
 
+
+
+        public DataTable ExecuteSelectQuery(string _query)
+        {
+            SqlCommand command = new SqlCommand();
+            DataTable dataTable = null;
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.Connection = open();
+                command.CommandText = _query;
+                command.ExecuteNonQuery();
+                DataAdapter.SelectCommand = command;
+                DataAdapter.Fill(ds);
+                dataTable = ds.Tables[0];
+
+            }
+            catch (Exception ex)
+            {
+                writeError($"Requête : {_query} \nSqlException : {ex.StackTrace.ToString()}");
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return dataTable;
+        }
+
         public int ExecutInsertQuery(string _query, SqlParameter[] parameters)
         {
             SqlCommand command = new SqlCommand();

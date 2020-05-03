@@ -150,5 +150,30 @@ namespace wpf_demo_phonebook
 
             return result;
         }
+
+        public int ExecutDeleteQuery(string _query, SqlParameter[] parameters)
+        {
+            SqlCommand command = new SqlCommand();
+            int result = 0;
+
+            try
+            {
+                command.Connection = open();
+                command.CommandText = _query;
+                command.Parameters.AddRange(parameters);
+                DataAdapter.DeleteCommand = command;
+                result = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                writeError($"Requête : {_query} \nSqlException : {ex.StackTrace.ToString()}");
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return result;
+        }
     }
 }

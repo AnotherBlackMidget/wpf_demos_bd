@@ -84,6 +84,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     
                     <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding SelectedContact.FirstName}"/>
@@ -92,6 +93,18 @@
                     <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding SelectedContact.Phone}"/>
                     <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding SelectedContact.Mobile}"/>
                     <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding SelectedContact.ContactID}"/>
+
+                    <Grid Grid.Row="8" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="8" Grid.Column="1" Content="Enregistrer" Command="{Binding UpdateContactCommand}"/>
+                        <Button Grid.Row="8" Grid.Column="2" Content="Suprimmer" Command="{Binding DeleteContactCommand}"/>
+                    </Grid>
+
+                    
                 </Grid>
             </Grid>
         

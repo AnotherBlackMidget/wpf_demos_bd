@@ -106,7 +106,17 @@ namespace wpf_demo_phonebook
             }
 
             return contacts;
-            
+
+        }
+
+        public static void UpdateContact(ContactModel cm)
+        {
+            dao.UpdateContact(cm.ContactID, cm.FirstName, cm.LastName, cm.Email, cm.Phone, cm.Mobile);
+        }
+
+        public static void DeleteContact(ContactModel cm)
+        {
+            dao.DeleteContact(cm.ContactID);
         }
     }
 }

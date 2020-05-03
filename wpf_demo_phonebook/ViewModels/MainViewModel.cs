@@ -44,13 +44,12 @@ namespace wpf_demo_phonebook.ViewModels
         }
 
         public RelayCommand SearchContactCommand { get; set; }
-        public RelayCommand LoadDataCommand { get; set; }
 
         public MainViewModel()
         {
             SearchContactCommand = new RelayCommand(SearchContact);
-            LoadDataCommand = new RelayCommand(LoadData);
 
+            Contacts = PhoneBookBusiness.LoadData();
             SelectedContact = PhoneBookBusiness.GetContactByID(1);
         }
 
@@ -73,21 +72,15 @@ namespace wpf_demo_phonebook.ViewModels
                     SelectedContact = PhoneBookBusiness.GetContactByID(output);
                     break;
                 case "name":
+                    Contacts = PhoneBookBusiness.GetxContactsByName(input);
                     SelectedContact = PhoneBookBusiness.GetContactByName(input);
                     break;
                 default:
                     MessageBox.Show("Unkonwn search method");
+                    Contacts = PhoneBookBusiness.LoadData();
                     break;
             }
         }
-
-        private void LoadData(object parameter)
-        {
-            Contacts = PhoneBookBusiness.LoadData();
-
-        }
-
-
 
     }
 }

@@ -55,5 +55,14 @@ namespace wpf_demo_phonebook
 
             return conn.ExecuteSelectQuery(_query, parameters);
         }
+
+        public DataTable LoadData()
+        {
+            string _query = $"SELECT * " + $"FROM [Contacts] ";
+
+            SqlParameter[] parameters = new SqlParameter[1];
+
+            return conn.ExecuteSelectQuery(_query, parameters);
+        }
     }
 }

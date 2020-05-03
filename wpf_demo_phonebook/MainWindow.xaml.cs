@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpf_demo_phonebook.ViewModels;
 
 namespace wpf_demo_phonebook
 {
@@ -25,5 +29,7 @@ namespace wpf_demo_phonebook
         {
             InitializeComponent();
         }
+
+        
     }
 }

@@ -18,7 +18,7 @@ namespace demo_northwind
         private void TestConnection_Click(object sender, RoutedEventArgs e)
         {
             var connString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-            
+
 
             using (SqlConnection conn = new SqlConnection(connString))
             {

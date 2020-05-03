@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Diagnostics;
 using System.Windows;
 using wpf_demo_phonebook.ViewModels.Commands;
 
@@ -17,6 +20,18 @@ namespace wpf_demo_phonebook.ViewModels
             }
         }
 
+        private ObservableCollection<ContactModel> contacts = new ObservableCollection<ContactModel>();
+
+        public ObservableCollection<ContactModel> Contacts
+        {
+            get => contacts;
+            set
+            {
+                contacts = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string criteria;
 
         public string Criteria
@@ -29,10 +44,13 @@ namespace wpf_demo_phonebook.ViewModels
         }
 
         public RelayCommand SearchContactCommand { get; set; }
+        public RelayCommand LoadDataCommand { get; set; }
 
         public MainViewModel()
         {
             SearchContactCommand = new RelayCommand(SearchContact);
+            LoadDataCommand = new RelayCommand(LoadData);
+
             SelectedContact = PhoneBookBusiness.GetContactByID(1);
         }
 
@@ -62,5 +80,14 @@ namespace wpf_demo_phonebook.ViewModels
                     break;
             }
         }
+
+        private void LoadData(object parameter)
+        {
+            Contacts = PhoneBookBusiness.LoadData();
+
+        }
+
+
+
     }
 }

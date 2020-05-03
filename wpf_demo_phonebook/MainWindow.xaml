@@ -20,10 +20,12 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Recherche : "/>
-                    <TextBox Grid.Column="1" x:Name="txtCriteria" HorizontalAlignment="Right" Width="150"/>
-                <Button Grid.Column="2" Content="Recherche" Command="{Binding SearchContactCommand}" CommandParameter="{Binding ElementName=txtCriteria,Path=Text}" />
+                <Button Grid.Column="0" Content="+Contact" Command="{Binding NewContactCommand}" />
+                <TextBlock Grid.Column="1" Text="Recherche : "/>
+                <TextBox Grid.Column="2" x:Name="txtCriteria" HorizontalAlignment="Right" Width="150"/>
+                <Button Grid.Column="3" Content="Recherche" Command="{Binding SearchContactCommand}" CommandParameter="{Binding ElementName=txtCriteria,Path=Text}" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.ColumnDefinitions>

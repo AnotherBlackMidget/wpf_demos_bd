@@ -9,6 +9,7 @@ namespace wpf_demo_phonebook.ViewModels
 {
     class MainViewModel : BaseViewModel
     {
+        bool newUser = false;
         private ContactModel selectedContact;
 
         public ContactModel SelectedContact
@@ -16,6 +17,7 @@ namespace wpf_demo_phonebook.ViewModels
             get => selectedContact;
             set { 
                 selectedContact = value;
+                newUser = false;
                 OnPropertyChanged();
             }
         }
@@ -46,12 +48,14 @@ namespace wpf_demo_phonebook.ViewModels
         public RelayCommand SearchContactCommand { get; set; }
         public RelayCommand UpdateContactCommand { get; set; }
         public RelayCommand DeleteContactCommand { get; set; }
+        public RelayCommand NewContactCommand { get; set; }
 
         public MainViewModel()
         {
             SearchContactCommand = new RelayCommand(SearchContact);
             UpdateContactCommand = new RelayCommand(UpdateContact);
             DeleteContactCommand = new RelayCommand(DeleteContact);
+            NewContactCommand = new RelayCommand(NewContact);
 
             Contacts = PhoneBookBusiness.LoadData();
             SelectedContact = PhoneBookBusiness.GetContactByID(1);
@@ -84,27 +88,53 @@ namespace wpf_demo_phonebook.ViewModels
                     Contacts = PhoneBookBusiness.LoadData();
                     break;
             }
+
+            newUser = false;
         }
 
         private void UpdateContact(object parameter)
         {
-            PhoneBookBusiness.UpdateContact(SelectedContact);
+            if(newUser == false)
+            {
+                PhoneBookBusiness.UpdateContact(SelectedContact);
+            }
+            else
+            {
+                PhoneBookBusiness.NewContact(SelectedContact);
+                newUser = false;
+            }
+            
+            
         }
 
         private void DeleteContact(object parameter)
         {
-            MessageBoxResult result = MessageBox.Show("Etes vous sure de vouloir supprimer ce contact", "Supprimer", MessageBoxButton.YesNo);
-            switch (result)
+            if (newUser == false)
             {
-                case MessageBoxResult.Yes:
-                    PhoneBookBusiness.DeleteContact(SelectedContact);
-                    Contacts = PhoneBookBusiness.LoadData();
-                    SelectedContact = PhoneBookBusiness.GetContactByID(1);
-                    MessageBox.Show("Contact Supprimer");
-                    break;
-                case MessageBoxResult.No:
-                    break;
+                MessageBoxResult result = MessageBox.Show("Etes vous sure de vouloir supprimer ce contact", "Supprimer", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        PhoneBookBusiness.DeleteContact(SelectedContact);
+                        Contacts = PhoneBookBusiness.LoadData();
+                        SelectedContact = PhoneBookBusiness.GetContactByID(1);
+                        MessageBox.Show("Contact Supprimer");
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
             }
+            else
+            {
+                SelectedContact = PhoneBookBusiness.GetContactByID(1);
+                newUser = false;
+            }
+        }
+
+        private void NewContact(object parameter)
+        {
+            SelectedContact = new ContactModel();
+            newUser = true;
         }
 
     }

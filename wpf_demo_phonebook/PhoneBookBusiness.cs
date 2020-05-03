@@ -118,5 +118,10 @@ namespace wpf_demo_phonebook
         {
             dao.DeleteContact(cm.ContactID);
         }
+
+        public static void NewContact(ContactModel cm)
+        {
+            dao.NewContact(cm.ContactID, cm.FirstName, cm.LastName, cm.Email, cm.Phone, cm.Mobile);
+        }
     }
 }
